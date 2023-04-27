@@ -1,0 +1,8 @@
+$> metadata start
+name greetings
+author kiky
+version 1.0
+usage greetings
+arguments name: Give-your-name;
+init greetings/greetings.init.py
+$> metadata ends

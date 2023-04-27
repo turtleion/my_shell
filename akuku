@@ -1,0 +1,8 @@
+$> metadata start
+name akus
+author kiky
+version 1.0
+usage akust
+arguments name: Give-your-name;
+init akus/akus.init.py
+$> metadata ends
