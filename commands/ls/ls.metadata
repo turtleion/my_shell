@@ -1,0 +1,7 @@
+$> metadata start
+name LSList
+author kiky
+version 1.0
+usage ls
+init ls/ls.init.py
+$> metadata ends

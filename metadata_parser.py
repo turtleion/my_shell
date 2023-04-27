@@ -169,8 +169,3 @@ class MetadataParser:
     def debug_fail(self): return self.load_fails
 # test unit
 
-
-with open("akuku") as f:
-
-    mp = MetadataParser(f)
-    print(mp.get_metadata())

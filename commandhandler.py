@@ -40,29 +40,30 @@ class CommandHandler:
                     except KeyError:
                         print("Failed loading keys")
 
-    def run_commands(self, commands, arguments: list):
+    def run_commands(self, commands, arguments: list=[]):
         # Check if the commands are available
         if commands not in self.command.keys():
-            print(self.command.keys())
+            # print(self.command.keys())
             print("Command with name: "+commands+" has not found")
             return (False, "cmd_notfound")
         # Check the arguments
-        if len(arguments) == 0 or len(self.command[commands]["arguments"]) > len(arguments):
+        if self.command[commands]["arguments"] is None:
+            self.command[commands]["arguments"] = []
+        if not self.command[commands]["arguments"] == [] and len(arguments) == 0 or len(self.command[commands]["arguments"]) > len(arguments):
             print("Arguments needed!\n")
             for i in self.command[commands]["arguments"]:
                 print(i[0] + ": " + i[1])
             print(str(len(arguments)) + " found")
             return (False, "argue_notcomplete")
         # Check the base commands and start executing it
-        print("commands/"+self.command[commands]["init"])
+        # print("commands/"+self.command[commands]["init"])
         if os.path.isfile("commands/"+self.command[commands]["init"]):
             try:
                 # Change the env variable
                 env = os.environ.copy()
                 env["PYTHONUSERBASE"] = os.getcwd()+"/commands"+";"+env["PYTHONUSERBASE"]
-                print(str(env).replace(",","\n"))
                 d = subprocess.run(
-                    "python3 commands/"+self.command[commands]["init"]+" "+str(arguments).replace("[", "").replace("]", ""), shell=True, env=env)
+                    "python3 commands/"+self.command[commands]["init"]+" "+str(arguments).replace("[", "").replace("]", "")+" "+os.getcwd(), shell=True, env=env)
             except (subprocess.CalledProcessError, subprocess.SubprocessError) as e:
                 print("Failed executing the commands : "+str(e))
                 return (False, "process_call_err")

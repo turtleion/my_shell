@@ -1,0 +1,8 @@
+$> metadata start
+name CopyFile
+author kiky
+version 1.0-PROTO
+usage cpy
+arguments src: Source-path-to-copy-to-the-destination; dest: destination-to-be-copied-here;
+init cpy/cpy.init.py
+$> metadata ends

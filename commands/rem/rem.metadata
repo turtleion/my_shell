@@ -1,0 +1,8 @@
+$> metadata start
+name Remover
+author kiky
+version 1.0
+usage rem
+arguments dest: Destination-to-remove;
+init rem/rem.init.py
+$> metadata ends

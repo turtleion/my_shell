@@ -8,7 +8,19 @@ class Shell:
         self.initstatus = False
         self.comhan = commandhandler.CommandHandler()
         # Start initialitation
-
+        self.history = []
+    def exit(self):
+        # Save history
+        try:
+            with open("history.bck", "w") as f:
+                for i in self.history:
+                    f.writelines(i)
+                    
+                f.close()
+        except (FileExistsError, FileNotFoundError) as f:
+            print("Unknown error")
+            pass
+        exit(2)
     def issempty(self, vval):
         if len(vval) == 0 or vval.isspace():
             return True
@@ -27,13 +39,15 @@ class Shell:
                 arguments = raw[:]
                 if self.issempty(a):
                     continue
+                self.history.append(a)
+                
                 out = self.comhan.run_commands(a.split(" ")[0], arguments)
 
             except ValueError:
                 print('not ok')
             except KeyboardInterrupt:
                 print("Exiting...")
-                exit(2)
+                self.exit()
 
 
 shell = Shell()
